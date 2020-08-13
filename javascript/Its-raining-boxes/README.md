@@ -1,5 +1,5 @@
 # Its-raining-boxes
-![gameplay.gif](https://raw.githubusercontent.com/NavpreetDevpuri/Its-raining-boxes/master/gameplay.gif)
+![gameplay.gif](./gameplay.gif)
 
 Its raining boxes is game made in pure javscript
 
