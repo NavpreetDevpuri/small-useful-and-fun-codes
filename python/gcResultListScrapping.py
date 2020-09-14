@@ -29,7 +29,7 @@ var aw = true;
 if(result.indexOf("FAIL")==-1) fail=false;
 if(result.indexOf("AW")==-1) aw=false;
 else result+="(";
-var maxmarks={ "Mathematics":150, "Physics":150, "Chemistry":150, "Drug Abuse Problem, Management and Prevention":0};
+var maxmarks={ "Mathematics":150, "Physics":150, "Chemistry":150, "Botany":150, "Zoology":150 , "Drug Abuse Problem, Management and Prevention":0};
 var subjects=[]; 
 var marks=[]; 
 var rows=table.firstElementChild.children; 
