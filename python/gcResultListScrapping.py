@@ -1,10 +1,14 @@
 from selenium import webdriver 
 import xlsxwriter
 import time
-b = webdriver.Chrome("chromedriver")
-workbook = xlsxwriter.Workbook('BScSem2Reppear.xlsx')
-worksheet = workbook.add_worksheet()
 
+rollRange = [9151, 9227]
+resultId = "11077482"
+fileName = "BScSem5_lp.xlsx"
+
+workbook = xlsxwriter.Workbook(fileName)
+worksheet = workbook.add_worksheet()
+b = webdriver.Chrome("chromedriver")
 subjets=[]
 #subjets.append('Punjabi(Compulsory)')
 #subjets.append('Punjabi (Mudla Gyan)')
@@ -30,10 +34,10 @@ var subjects=[];
 var marks=[]; 
 var rows=table.firstElementChild.children; 
 var total=0; 
-for(var i=1;i<rows.length-2;++i) { 
+for(var i=1;i<rows.length-1;++i) { 
  marks.push(0); 
  var columns=rows[i].children; 
- subjects.push(columns[1].innerText); 
+ subjects.push(columns[0].innerText); 
  var subtotal=parseInt(columns[columns.length-1].innerText); 
  if(!isNaN(subtotal)) { 
   marks[i-1]=subtotal; total+=subtotal; continue; 
@@ -66,8 +70,8 @@ rtrn.push(marks);
 rtrn.push(result);
 return rtrn;
 '''
-for i in range(611700,611800):
-    b.get("http://pupdepartments.ac.in/puexam/t2/results/results.php?rslstid=11076857&ROLL="+str(i)+"&submit=Submit")
+for i in range(rollRange[0],rollRange[1]+1):
+    b.get("http://pupdepartments.ac.in/puexam/t2/results/results.php?rslstid="+resultId+"&ROLL="+str(i)+"&submit=Submit")
     r=b.execute_script(getResultScript)
     if(r==0): continue
     print(r)
@@ -87,5 +91,6 @@ for i in range(611700,611800):
             worksheet.write(0, csub , r[1][j])
             worksheet.write(x, csub, r[2][j])
             csub=csub+1
+    
 workbook.close()
 b.quit()
