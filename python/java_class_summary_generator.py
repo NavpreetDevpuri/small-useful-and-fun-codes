@@ -4,7 +4,7 @@ import os
 def summary(file_name):
     file_name = file_name[:-5]
     code_r = open(os.path.join(os.path.dirname(__file__), "input", file_name + ".java"), "r", encoding='utf8').read()
-    code = code_r
+    code = code_r.replace("−", "-").replace("”", '"')
 
     def find(class_code, spaces, keyword):
         code_temp = class_code[class_code.find(spaces + keyword):]
