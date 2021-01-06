@@ -4,14 +4,21 @@ import time
 from PyPDF2 import PdfFileReader, PdfFileWriter
 import glob
 import os
+import magic
 
-'''
+# from_date_and_time = "16/12/2020 13:00:00"
+# to_date_and_time = "16/12/2020 16:00:00"
+# save_folder_name = "bsc sem 5"
 
-'''
+if not os.path.exists("client_secret.json"):
+    client_secret = input("Enter client_secret json: ")
+    with open("client_secret.json", "w") as f:
+        f.write(client_secret)
 
-from_date_and_time = "16/12/2020 13:00:00"
-to_date_and_time = "16/12/2020 16:00:00"
-save_folder_name = "bsc sem 5"
+print("Enter date and time (16/12/2020 13:00:00)")
+from_date_and_time = input("Enter from: ")
+to_date_and_time = input("Enter to: ")
+save_folder_name = input("Folder name: ")
 
 
 def _get_timestamp(date_and_time="16/12/2020 13:00:00"):
@@ -22,13 +29,15 @@ class PaperDownloader:
     def __init__(self, after_date_and_time, before_date_and_time, save_dir="output"):
         self.gmail = Gmail()
         self.save_dir = save_dir
-        self.messages = self.gmail.get_unread_inbox(
+        self.messages = self.gmail.get_messages(
             query=f'after:{_get_timestamp(after_date_and_time)} '
                   f'before:{_get_timestamp(before_date_and_time)} '
                   f'has:attachment')
         os.makedirs(save_dir, exist_ok=True)
+        i = 0
         for message in self.messages:
-            print("From: " + message.sender)
+            i += 1
+            print(f"{i}/{len(self.messages)} From: " + message.sender)
             if message.attachments:
                 for attm in message.attachments:
                     if attm.filename.find(".pdf") != -1 or attm.filename.find(".PDF") != -1:
