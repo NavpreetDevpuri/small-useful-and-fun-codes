@@ -16,7 +16,7 @@ timeStr=sys.argv[2]
 
 temp = timeStr.split(":")
 
-timeSec = (int(temp[0]) * 60  + int(temp[1])) * 60 + int(temp[2])
+timeSec = (int(temp[0]) * 60 * 60  + int(temp[1])) * 60 + int(temp[2])
 vLenSec = get_length(filePath)
 
 vLenSec/timeSec
