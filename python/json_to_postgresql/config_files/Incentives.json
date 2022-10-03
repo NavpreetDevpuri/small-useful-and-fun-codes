@@ -1,0 +1,13 @@
+{
+  "field_to_column_map": {
+    "name":"name",
+    "amount":"amount_required",
+    "cap":"capped_amount",
+    "escalation":"escalation_factor",
+    "duration":"duration",
+    "incentive_type":"incentive_type",
+    "system_size_basis":"system_size_based_type"
+  }, 
+  "should_delete_old_table": true,
+  "create_table_sql_query": "CREATE TABLE IF NOT EXISTS incentives (id SERIAL PRIMARY KEY, name TEXT, amount_required FLOAT, capped_amount FLOAT, escalation_factor FLOAT, duration FLOAT, incentive_type TEXT, system_size_based_type TEXT)"
+}
